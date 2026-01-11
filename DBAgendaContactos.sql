@@ -8,3 +8,6 @@ CREATE TABLE Contactos (
     
 );
 
+--Consulta para obtener todos los contactos ordenados por apellidos--
+SELECT Id_Contacto, Apellido, Nombre, Telefono FROM Contactos ORDER BY Apellido ASC
+

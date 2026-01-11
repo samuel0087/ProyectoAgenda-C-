@@ -45,7 +45,7 @@ namespace Conexion
             }
         }
 
-        public void ejecutarAccion(string query)
+        public void ejecutarAccion()
         {
             comando.Connection = conexion;
             try
