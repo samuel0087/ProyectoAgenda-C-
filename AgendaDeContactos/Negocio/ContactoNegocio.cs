@@ -11,7 +11,7 @@ namespace Negocio
     public class ContactoNegocio
     {
 
-        public List<Contacto> listar()
+        public List<Contacto> Listar()
         {
             List<Contacto> listaContactos = new List<Contacto>();
             AccesoDatos datos = new AccesoDatos();
@@ -36,20 +36,16 @@ namespace Negocio
                 return listaContactos;
 
             }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
             finally
             {
                 datos.cerrarConexion();
             }
         }
 
-        public void eliminar(int id)
+        public void Eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
-            string query = "DELETE FROM Contactos WHERE Id_Contactos = @id";
+            string query = "DELETE FROM Contactos WHERE Id_Contacto = @id";
 
             try
             {
@@ -57,9 +53,26 @@ namespace Negocio
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
             }
-            catch(Exception ex)
+            finally
             {
-                throw ex;
+                datos.cerrarConexion();
+            }
+        }
+
+        public void Agregar(Contacto contacto)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            string query = "INSERT INTO Contactos (Apellido, Nombre, Telefono) VALUES (@apellido, @nombre, @telefono)";
+
+            try
+            {
+                datos.setearConsulta(query);
+                datos.setearParametro("@apellido", contacto.Apellido);
+                datos.setearParametro("@nombre", contacto.Nombre);
+                datos.setearParametro("@telefono", contacto.Telefono);
+
+                datos.ejecutarAccion();
+
             }
             finally
             {
@@ -67,5 +80,57 @@ namespace Negocio
             }
         }
 
+        public void Modificar(Contacto contacto)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            string query = "UPDATE Contactos SET Apellido = @apellido, Nombre = @nombre, Telefono = @telefono WHERE Id_Contacto = @id";
+
+            try
+            {
+                datos.setearConsulta(query);
+                datos.setearParametro("@apellido", contacto.Apellido);
+                datos.setearParametro("@nombre", contacto.Nombre);
+                datos.setearParametro("@telefono", contacto.Telefono);
+                datos.setearParametro("@id", contacto.IdContacto);
+
+                datos.ejecutarAccion();
+
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool ExisteTelefono(string telefono)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            string query = "SELECT Id_Contacto FROM Contactos WHERE Telefono = @telefono";
+
+            try
+            {
+                datos.setearConsulta(query);
+                datos.setearParametro("@telefono", telefono);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return true;
+                }
+
+                return false;
+            }
+            finally{
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Contacto> BuscarConFiltro(string filtro)
+        {
+            List<Contacto> listaFiltrada = new List<Contacto>();
+           
+            listaFiltrada = this.Listar().FindAll(contacto => contacto.Nombre.ToUpper().Contains(filtro.ToUpper()) || contacto.Telefono.Contains(filtro));
+            return listaFiltrada;
+        }
     }
 }
