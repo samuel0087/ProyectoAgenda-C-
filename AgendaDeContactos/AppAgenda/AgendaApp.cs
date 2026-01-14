@@ -124,5 +124,48 @@ namespace AppAgenda
             }
             
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(dgvContactos.CurrentRow != null)
+                {
+                    Contacto seleccionado = (Contacto)dgvContactos.CurrentRow.DataBoundItem;
+                    FormularioContactos frmModificar = new FormularioContactos(seleccionado);
+                    frmModificar.ShowDialog();
+                    Cargar();
+                }
+            }
+            catch{
+                MessageBox.Show("No se pudo deleccionar el elemento correctamente, intente con otro por el momento");
+                CambiarVisibilidadLabels(false);
+            }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtBuscar.Text.Length > 0)
+                {
+                    List<Contacto> listaFiltrada = cNegocio.BuscarConFiltro(txtBuscar.Text);
+                    CargarLista(listaFiltrada);
+                }
+                else
+                {
+                    CargarLista(cNegocio.Listar());
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Error en la Busqueda, intentelo de nuevo");
+            }
+            finally
+            {
+                CambiarVisibilidadLabels(false);
+            }
+        }
     }
 }
