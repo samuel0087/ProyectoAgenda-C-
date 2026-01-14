@@ -12,16 +12,16 @@ using Negocio;
 
 namespace AppAgenda
 {
-    public partial class AgendaApp : Form
+    public partial class FrmAgenda : Form
     {
         private ContactoNegocio cNegocio = new ContactoNegocio();
 
-        public AgendaApp()
+        public FrmAgenda()
         {
             InitializeComponent();
         }
 
-        private void AgendaApp_Load(object sender, EventArgs e)
+        private void FrmAgenda_Load(object sender, EventArgs e)
         {
             Cargar();
         }
@@ -34,7 +34,8 @@ namespace AppAgenda
                 CambiarVisibilidadLabels(false);
             }
             catch
-            { 
+            {
+                MessageBox.Show("No se pudo cargar la agenda");
             }
 
         }
@@ -65,18 +66,10 @@ namespace AppAgenda
         private void dgvContactos_SelectionChanged(object sender, EventArgs e)
         {
 
-            try
+            if(dgvContactos.CurrentRow != null)
             {
-                if(dgvContactos.CurrentRow != null)
-                {
-                    Contacto seleccionado = (Contacto)dgvContactos.CurrentRow.DataBoundItem;
-                    CargarDatos(seleccionado);
-                }
-            }
-            catch 
-            {
-                MessageBox.Show("No se pudo deleccionar el elemento correctamente, intente con otro por el momento");
-                CambiarVisibilidadLabels(false);
+                Contacto seleccionado = (Contacto)dgvContactos.CurrentRow.DataBoundItem;
+                CargarDatos(seleccionado);
             }
             
         }
@@ -92,9 +85,13 @@ namespace AppAgenda
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            FormularioContactos fmrAgregar = new FormularioContactos();
-            fmrAgregar.ShowDialog();
-            Cargar();
+            FrmContactos frmAgregar = new FrmContactos();
+            DialogResult result = frmAgregar.ShowDialog();
+
+            if(result != DialogResult.Cancel)
+            {
+                Cargar();
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -111,6 +108,7 @@ namespace AppAgenda
                     {
                         cNegocio.Eliminar(seleccionado.IdContacto);
                         MessageBox.Show("Eliminado exitosamente", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Cargar();
                     }
                 }
             }
@@ -118,10 +116,7 @@ namespace AppAgenda
             {
                 MessageBox.Show("No se pudo eliminar el contacto, intentelo mas tarde");
             }
-            finally
-            {
-                Cargar();
-            }
+
             
         }
 
@@ -132,9 +127,13 @@ namespace AppAgenda
                 if(dgvContactos.CurrentRow != null)
                 {
                     Contacto seleccionado = (Contacto)dgvContactos.CurrentRow.DataBoundItem;
-                    FormularioContactos frmModificar = new FormularioContactos(seleccionado);
-                    frmModificar.ShowDialog();
-                    Cargar();
+                    FrmContactos frmModificar = new FrmContactos(seleccionado);
+                    DialogResult result = frmModificar.ShowDialog();
+
+                    if(result != DialogResult.Cancel) 
+                    {
+                        Cargar();
+                    }
                 }
             }
             catch{
@@ -145,27 +144,18 @@ namespace AppAgenda
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (txtBuscar.Text.Length > 0)
-                {
-                    List<Contacto> listaFiltrada = cNegocio.BuscarConFiltro(txtBuscar.Text);
-                    CargarLista(listaFiltrada);
-                }
-                else
-                {
-                    CargarLista(cNegocio.Listar());
-                }
 
-            }
-            catch
+            if (txtBuscar.Text.Length > 0)
             {
-                MessageBox.Show("Error en la Busqueda, intentelo de nuevo");
+                List<Contacto> listaFiltrada = cNegocio.BuscarConFiltro(txtBuscar.Text);
+                CargarLista(listaFiltrada);
             }
-            finally
+            else
             {
-                CambiarVisibilidadLabels(false);
+                CargarLista(cNegocio.Listar());
             }
+
+             CambiarVisibilidadLabels(false);
         }
     }
 }

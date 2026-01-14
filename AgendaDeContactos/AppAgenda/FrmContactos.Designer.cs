@@ -1,6 +1,6 @@
 ﻿namespace AppAgenda
 {
-    partial class FormularioContactos
+    partial class FrmContactos
     {
         /// <summary>
         /// Required designer variable.
@@ -175,7 +175,7 @@
             this.Name = "FormularioContactos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormularioContactos";
-            this.Load += new System.EventHandler(this.FormularioContactos_Load);
+            this.Load += new System.EventHandler(this.FrmContactos_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

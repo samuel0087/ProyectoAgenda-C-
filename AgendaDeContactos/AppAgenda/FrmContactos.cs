@@ -11,20 +11,19 @@ using System.Windows.Forms;
 
 namespace AppAgenda
 {
-    public partial class FormularioContactos : Form
+    public partial class FrmContactos : Form
     {
         private Contacto contacto = null;
 
-        public FormularioContactos()
+        public FrmContactos()
         {
             InitializeComponent();
         }
 
-        public FormularioContactos(Contacto contacto)
+        public FrmContactos(Contacto contacto)
         {
-            this.contacto = new Contacto();
-            this.contacto = contacto;
             InitializeComponent();
+            this.contacto = contacto;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -32,11 +31,11 @@ namespace AppAgenda
             Close();
         }
 
-        private void FormularioContactos_Load(object sender, EventArgs e)
+        private void FrmContactos_Load(object sender, EventArgs e)
         {
             if(contacto != null)
             {
-                Text = "Modifiicar";
+                Text = "Modificar";
                 lblTitulo.Text = "Modificar Contacto";
                 CargarFormulario();
             }

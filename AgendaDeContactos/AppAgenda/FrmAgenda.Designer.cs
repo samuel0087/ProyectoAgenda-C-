@@ -1,6 +1,6 @@
 ﻿namespace AppAgenda
 {
-    partial class AgendaApp
+    partial class FrmAgenda
     {
         /// <summary>
         /// Required designer variable.
@@ -155,7 +155,7 @@
             this.Name = "AgendaApp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agenda de Contactos";
-            this.Load += new System.EventHandler(this.AgendaApp_Load);
+            this.Load += new System.EventHandler(this.FrmAgenda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvContactos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

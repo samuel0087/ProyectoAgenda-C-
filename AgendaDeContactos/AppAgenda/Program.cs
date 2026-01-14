@@ -16,7 +16,7 @@ namespace AppAgenda
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AgendaApp());
+            Application.Run(new FrmAgenda());
         }
     }
 }

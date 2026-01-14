@@ -46,25 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgendaApp.cs">
+    <Compile Include="FrmAgenda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AgendaApp.Designer.cs">
-      <DependentUpon>AgendaApp.cs</DependentUpon>
+    <Compile Include="FrmAgenda.Designer.cs">
+      <DependentUpon>FrmAgenda.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormularioContactos.cs">
+    <Compile Include="FrmContactos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormularioContactos.Designer.cs">
-      <DependentUpon>FormularioContactos.cs</DependentUpon>
+    <Compile Include="FrmContactos.Designer.cs">
+      <DependentUpon>FrmContactos.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AgendaApp.resx">
-      <DependentUpon>AgendaApp.cs</DependentUpon>
+    <EmbeddedResource Include="FrmAgenda.resx">
+      <DependentUpon>FrmAgenda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormularioContactos.resx">
-      <DependentUpon>FormularioContactos.cs</DependentUpon>
+    <EmbeddedResource Include="FrmContactos.resx">
+      <DependentUpon>FrmContactos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
