@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace AppAgenda
 {
-    public partial class Form1 : Form
+    public partial class FormularioContactos : Form
     {
-        public Form1()
+        public FormularioContactos()
         {
             InitializeComponent();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
