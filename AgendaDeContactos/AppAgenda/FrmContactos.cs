@@ -189,11 +189,11 @@ namespace AppAgenda
             if (string.IsNullOrEmpty(txtTelefono.Text))
             {
                 lblErrorTelefono.Text = "Campo obligatorio";
-
-                if(txtTelefono.Text == "+")
-                {
-                    lblErrorTelefono.Text = "Debe contener numeros";
-                }
+                estado = false;
+            }
+            else if (txtTelefono.Text == "+")
+            {
+                lblErrorTelefono.Text = "Debe contener numeros";
                 estado = false;
             }
 
